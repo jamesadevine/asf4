@@ -59,7 +59,7 @@
 // Use SERCOM settings as prototypes to set
 // the default settings. The asf4_conf/hpl_sercom_config.h file
 // defines these bindings, and chooses a SERCOM (listed as x here).
-// 
+//
 // #define PROTOTYPE_SERCOM_SPI_M_SYNC SERCOMx
 // #define PROTOTYPE_SERCOM_I2CM_SYNC SERCOMx
 // #define PROTOTYPE_SERCOM_USART_ASYNC SERCOMx
@@ -703,7 +703,7 @@ static void _sercom_init_irq_param(const void *const hw, void *dev)
  */
 static int32_t _usart_init(void *const hw)
 {
- 
+
 	// Use a prototypical instance to get settings, not the given SERCOM (hw).
         uint8_t i = _get_sercom_index(PROTOTYPE_SERCOM_USART_ASYNC);
 
@@ -1200,7 +1200,7 @@ int32_t _i2c_m_async_set_baudrate(struct _i2c_m_async_device *const i2c_dev, uin
 	} else if (i2c_dev->service.mode == I2C_HIGHSPEED_MODE) {
 		tmp = (clkrate - 2 * baudrate) / (2 * baudrate);
                 // not tested
-                // 1:2 high:low ratio 
+                // 1:2 high:low ratio
 		hri_sercomi2cm_write_BAUD_HSBAUD_bf(hw, tmp / 3);
 		hri_sercomi2cm_write_BAUD_HSBAUDLOW_bf(hw, tmp*2 / 3);
 	} else {
@@ -1491,7 +1491,7 @@ int32_t _i2c_m_sync_set_baudrate(struct _i2c_m_sync_device *const i2c_dev, uint3
 	} else if (i2c_dev->service.mode == I2C_HIGHSPEED_MODE) {
 		tmp = (clkrate - 2 * baudrate) / (2 * baudrate);
                 // not tested
-                // 1:2 high:low ratio 
+                // 1:2 high:low ratio
 		hri_sercomi2cm_write_BAUD_HSBAUD_bf(hw, tmp / 3);
 		hri_sercomi2cm_write_BAUD_HSBAUDLOW_bf(hw, tmp*2 / 3);
 	} else {
@@ -1528,7 +1528,7 @@ void _i2c_m_async_set_irq_state(struct _i2c_m_async_device *const device, const 
  */
 inline static int32_t _sercom_i2c_sync_wait_bus(struct _i2c_m_sync_device *const i2c_dev, uint32_t *flags)
 {
-	uint32_t timeout = 4194303;
+	uint32_t timeout = 65535;
 	void *   hw      = i2c_dev->hw;
 
 	do {
